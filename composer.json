@@ -1,0 +1,16 @@
+{
+	"keywords" : [
+		"radical-php"
+	],
+	"autoload" : {
+		"psr-0" : {
+			"Radical" : "src"
+		}
+	},
+	"name" : "Radical/radical-common",
+	"type" : "library",
+	"description" : "radical-common",
+	"require" : {
+		"php" : ">=5.4"
+	}
+}
