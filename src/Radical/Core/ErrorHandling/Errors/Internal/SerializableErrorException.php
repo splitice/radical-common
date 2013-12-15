@@ -1,7 +1,7 @@
 <?php
 namespace Radical\Core\ErrorHandling\Errors\Internal;
 use Web\Page\Controller;
-use Core\ErrorHandling\IErrorException;
+use Radical\Core\ErrorHandling\IErrorException;
 
 class SerializableErrorException implements IErrorException {
 	protected $heading;

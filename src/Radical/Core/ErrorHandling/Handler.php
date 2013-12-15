@@ -1,7 +1,7 @@
 <?php
 namespace Radical\Core\ErrorHandling;
 
-use Core\ErrorHandling\Errors\Internal\ErrorException;
+use Radical\Core\ErrorHandling\Errors\Internal\ErrorException;
 
 /* STATIC */
 abstract class Handler {

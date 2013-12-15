@@ -1,7 +1,7 @@
 <?php
 namespace Radical\Core\ErrorHandling\Errors\Internal;
-use Web\Page\Controller;
-use Core\ErrorHandling\IErrorException;
+use Radical\Web\Page\Controller;
+use Radical\Core\ErrorHandling\IErrorException;
 
 abstract class ErrorException extends \Exception implements IErrorException {
 	protected $heading;

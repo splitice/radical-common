@@ -1,9 +1,9 @@
 <?php
 namespace Radical\Core\ErrorHandling\Handlers;
 
-use Core\ErrorHandling\Errors\Internal\ErrorBase;
-use Core\ErrorHandling\Errors\Internal\ErrorException;
-use Core\ErrorHandling\Handler;
+use Radical\Core\ErrorHandling\Errors\Internal\ErrorBase;
+use Radical\Core\ErrorHandling\Errors\Internal\ErrorException;
+use Radical\Core\ErrorHandling\Handler;
 
 abstract class ErrorHandlerBase extends Handler {
 	/**

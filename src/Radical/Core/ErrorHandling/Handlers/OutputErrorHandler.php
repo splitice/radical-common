@@ -1,13 +1,13 @@
 <?php
 namespace Radical\Core\ErrorHandling\Handlers;
 
-use Core\ErrorHandling\IToCode;
-use Core\ErrorHandling\Errors\Internal\ErrorBase;
-use Core\ErrorHandling\Errors\Internal\ErrorException;
-use CLI\Console\Colors;
-use CLI\Threading\Thread;
-use Core\ErrorHandling\Errors;
-use Web\Page\Handler\PageRequest;
+use Radical\Core\ErrorHandling\IToCode;
+use Radical\Core\ErrorHandling\Errors\Internal\ErrorBase;
+use Radical\Core\ErrorHandling\Errors\Internal\ErrorException;
+use Radical\CLI\Console\Colors;
+use Radical\CLI\Threading\Thread;
+use Radical\Core\ErrorHandling\Errors;
+use Radical\Web\Page\Handler\PageRequest;
 
 class OutputErrorHandler extends ErrorHandlerBase {
 	const CLI_START = "[%s]%s\n";

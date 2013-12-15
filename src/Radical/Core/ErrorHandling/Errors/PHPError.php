@@ -1,7 +1,7 @@
 <?php
 namespace Radical\Core\ErrorHandling\Errors;
 
-use Core\Server;
+use Radical\Core\Server;
 class PHPError extends Internal\ErrorBase {
 	const HEADER = 'Site Error (PHP)';
 	

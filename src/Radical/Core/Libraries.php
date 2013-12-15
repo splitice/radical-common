@@ -83,43 +83,4 @@ class Libraries {
 	static function getNSExpression($expr){
 		return self::get($expr);
 	}
-	
-	/**
-	 * Get all classes
-	 * 
-	 * @return array of classes
-	 */
-	static function getAllClass(){
-		$classes = array();
-		foreach(\AutoLoader::$pathCache as $libDir){
-			$prefixLen = strlen(realpath($libDir));
-			foreach(\Folder::ListDir($libDir,true) as $f){
-				$f = substr($f,$prefixLen);
-				$base = basename($f);
-				if(substr($base,0,2) != '__' && $base != 'bootloader.php'){
-					$f = ltrim($f,DIRECTORY_SEPARATOR);
-					if(pathinfo($f,PATHINFO_EXTENSION) == 'php'){
-						$f = substr($f,0,-4);
-						$classes[] = self::toClass($f);
-					}
-				}
-			}
-		}
-		return array_unique($classes);
-	}
-	
-	
-	/**
-	 * Get all libraries.
-	 * Returns an array where the key is the library name, and the value is the path.
-	 * 
-	 * @return array
-	 */
-	static function getLibraries(){
-		$ret = array();
-		foreach(\AutoLoader::$pathCache as $pc){
-			$ret[basename($pc)] = $pc;
-		}
-		return $ret;
-	}
 }

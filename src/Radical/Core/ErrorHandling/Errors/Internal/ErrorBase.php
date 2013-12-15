@@ -1,7 +1,7 @@
 <?php
 namespace Radical\Core\ErrorHandling\Errors\Internal;
 
-use Core\ErrorHandling\Handler;
+use Radical\Core\ErrorHandling\Handler;
 
 abstract class ErrorBase extends ErrorException {
 	function __construct($message,$header = 'An error has occured',$fatal=false){

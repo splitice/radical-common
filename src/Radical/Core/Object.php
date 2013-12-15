@@ -3,23 +3,6 @@ namespace Radical\Core;
 
 //TODO: Make use comments for dependencies and provides
 class Object {
-	static $__dependencies = array();
-	static $__provides = array();
-	
-	static function __getDependencies(){
-		$dependencies = static::$__dependencies;
-		$class = new Debug\PHPClassTools(\Core\Libraries::toPath(get_called_class(),true));
-		foreach($class->getDependencies() as $d){
-			$dependencies[] = 'php.'.str_replace('\\','.',ltrim($d,'\\'));
-		}
-		return $dependencies;
-	}
-	
-	static function __getProvides(){
-		$provides = static::$__provides;
-		$provides[] = 'php.'.str_replace('\\', '.', $provides);
-		return $provides;
-	}
 	
 	/**
 	 * calls a toMethod dynamically
