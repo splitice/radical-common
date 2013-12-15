@@ -6,14 +6,14 @@
  * @license       http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace Radical\Core\Debug;
+namespace Radical\Core\Parser;
 
 /**
  * The parser class uses PHP's tokenizer to provide methods and tools for performing static analysis
  * on PHP code.
  */
-use Basic\Arr\Set;
-use Basic\Arr\Object\CollectionObject;
+use Radical\Basic\Arr\Set;
+use Radical\Basic\Arr\Object\CollectionObject;
 
 class Parser {
 

@@ -6,14 +6,13 @@
  * @license       http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace Radical\Core\Debug;
-
-use Basic\Arr\Object\CollectionObject;
+namespace Radical\Core\Parser;
 
 use Exception;
 use ReflectionClass;
 use ReflectionProperty;
 use ReflectionException;
+use Radical\Basic\Arr\Object\CollectionObject;
 
 /**
  * General source code inspector.
@@ -61,7 +60,7 @@ class Inspector {
 		if (strpos($identifier, '::')) {
 			return (strpos($identifier, '$') !== false) ? 'property' : 'method';
 		}
-		if (is_readable(\Core\Libraries::path($identifier))) {
+		if (is_readable(\Radical\Core\Libraries::path($identifier))) {
 			if (class_exists($identifier) && in_array($identifier, get_declared_classes())) {
 				return 'class';
 			}
@@ -343,7 +342,7 @@ class Inspector {
 	public static function lines($data, $lines) {
 		if (!strpos($data, PHP_EOL)) {
 			if (!file_exists($data)) {
-				$data = \Core\Libraries::path($data);
+				$data = \Radical\Core\Libraries::path($data);
 				if (!file_exists($data)) {
 					return null;
 				}
@@ -396,7 +395,8 @@ class Inspector {
 		$files = get_included_files();
 		$classes = array();
 
-		if ($file = $options['file']) {
+		$file = $options['file'];
+		if ($file) {
 			$loaded = static::_instance('collection', array('data' => array_map(
 					function($class) {
 				return new ReflectionClass($class);
@@ -451,7 +451,7 @@ class Inspector {
 		};
 
 		foreach ((array) $classes as $class) {
-			$data = explode("\n", file_get_contents(\Core\Libraries::path($class)));
+			$data = explode("\n", file_get_contents(\Radical\Core\Libraries::path($class)));
 			$data = "<?php \n" . join("\n", preg_grep('/^\s*use /', $data)) . "\n ?>";
 
 			$classes = array_map($join, Parser::find($data, 'use *;', array(
