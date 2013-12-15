@@ -1,14 +1,17 @@
 {
-  "name" : "splitice/radical-common",
-  "description" : "radical-common",
-  "require" : {
-    "php" : ">=5.4"
-  },
-  "keywords" : [ "radical-php" ],
-  "autoload" : {
-    "psr-0" : {
-      "Radical" : "src"
-    }
-  },
-  "type" : "library"
+	"name" : "splitice/radical-common",
+	"description" : "radical-common",
+	"require" : {
+		"php" : ">=5.4",
+		"symfony/filesystem" : "2.4.0"
+	},
+	"keywords" : [
+		"radical-php"
+	],
+	"autoload" : {
+		"psr-0" : {
+			"Radical" : "src"
+		}
+	},
+	"type" : "library"
 }
