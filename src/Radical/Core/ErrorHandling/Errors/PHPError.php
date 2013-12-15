@@ -7,7 +7,7 @@ class PHPError extends Internal\ErrorBase {
 	
 	function __construct($errno, $msg_text, Structs\LocationReference $where){
 		//Build Error page
-		if(!\Core\Server::isProduction() || \Core\Server::isCLI()){
+		if(!\Radical\Core\Server::isProduction() || \Radical\Core\Server::isCLI()){
 			$message = 'A PHP error occured at '.$where->toShort().': '.$msg_text;
 		}else{
 			$message = 'An error has occured in the script.';
@@ -25,7 +25,7 @@ class PHPError extends Internal\ErrorBase {
 		parent::__construct($message,static::HEADER,$fatal);
 		
 		//CLI Display PHP errors
-		if(!$fatal && \Core\Server::isCLI()){
+		if(!$fatal && \Radical\Core\Server::isCLI()){
 			switch($errno){
 				case E_COMPILE_WARNING:
 				case E_CORE_WARNING:
