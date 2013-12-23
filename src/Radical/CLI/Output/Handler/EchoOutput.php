@@ -1,5 +1,5 @@
 <?php
-namespace CLI\Output\Handler;
+namespace Radical\CLI\Output\Handler;
 
 class EchoOutput implements IOutputHandler {
 	function output($string){

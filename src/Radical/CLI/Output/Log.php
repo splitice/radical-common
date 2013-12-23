@@ -1,5 +1,5 @@
 <?php
-namespace CLI\Output;
+namespace Radical\CLI\Output;
 
 class Log {
 	const LOG_PATH = '../../../../log/';

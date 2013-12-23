@@ -7,7 +7,7 @@
  */
 
 namespace Radical\Core\Debug\Test;
-use Core\Provider;
+use Radical\Core\Provider;
 
 /**
  * The Test Controller for running the html version of the test suite

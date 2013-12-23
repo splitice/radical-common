@@ -9,8 +9,8 @@
 namespace Radical\Core\Debug\Test;
 use Exception;
 use Libraries;
-use Core\Debug\Debugger;
-use Core\Debug\Inspector;
+use Radical\Core\Debug\Debugger;
+use Radical\Core\Debug\Inspector;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Basic\String;

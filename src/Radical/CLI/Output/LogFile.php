@@ -1,5 +1,5 @@
 <?php
-namespace CLI\Output;
+namespace Radical\CLI\Output;
 class LogFile {
 	private $file;
 	const DATE_FORMAT = 'd-m-y H:i:s.';

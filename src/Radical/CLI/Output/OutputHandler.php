@@ -1,5 +1,5 @@
 <?php
-namespace CLI\Output;
+namespace Radical\CLI\Output;
 
 class OutputHandler {
 	private static $handler;

@@ -6,15 +6,15 @@ class Provider {
 		$idExpanded = explode('.',$id);
 		if($idExpanded[0] == 'php'){//php dependency -- simple check
 			$phpClass = str_replace('.',DIRECTORY_SEPARATOR,substr($id,4));
-			$phpClass = \Core\Libraries::toClass($phpClass);
+			$phpClass = Libraries::toClass($phpClass);
 			if(class_exists($phpClass) || interface_exists($phpClass)){
 				return $phpClass;
 			}
 		}
 		if($idExpanded[0] == 'lib'){//custom lib reference
 			$found = array();
-			foreach(\Core\Libraries::getAllClass() as $class){
-				if(oneof($class, '\\Core\\Object')){
+			foreach(Libraries::getAllClass() as $class){
+				if(CoreInterface::oneof($class, '\\Core\\Object')){
 					if(in_array($id, $class::__getProvides())){
 						$found[] = $class;
 					}
@@ -30,8 +30,8 @@ class Provider {
 		if($idExpanded[0] == 'interface'){//everything using an interface
 			$interface = implode('\\',array_slice($idExpanded,1));
 			$found = array();
-			foreach(\Core\Libraries::getAllClass() as $class){
-				if(oneof($class, $interface)){
+			foreach(Libraries::getAllClass() as $class){
+				if(CoreInterface::oneof($class, $interface)){
 					$found[] = $class;
 				}
 			}

@@ -1,5 +1,5 @@
 <?php
-namespace CLI\Output\Log;
+namespace Radical\CLI\Output\Log;
 
 class ErrorCheck{
 	private $fh;

@@ -1,5 +1,5 @@
 <?php
-namespace CLI\Output\Handler;
+namespace Radical\CLI\Output\Handler;
 
 interface IOutputHandler {
 	function output($string);

@@ -1,7 +1,23 @@
 <?php
 namespace Radical\Core;
 
+use Composer\Autoload\ClassLoader;
 class Libraries {
+	static function composer_autoloader(){
+		static $once = false;
+		if($once === false){
+			foreach(spl_autoload_functions () as $a){
+				if(is_array($a)){
+					if($a instanceof ClassLoader){
+						$once = $a;
+						break;
+					}
+				}
+			}
+		}
+		return $once;
+	}
+	
 	/**
 	 * Resolves a relative path to class the
 	 * appropriate full class path.
@@ -10,7 +26,7 @@ class Libraries {
 	 * @return string
 	 */
 	static function path($path){
-		return \Autoloader::resolve($path);
+		return self::composer_autoloader()->findFile(self::toClass($path));
 	}
 	
 	/**
@@ -52,6 +68,10 @@ class Libraries {
 		return '\\'.$project.'\\'.ltrim($class,'\\');
 	}
 	
+	static function getAllClass(){
+		return array_keys(self::composer_autoloader()->getClassMap());
+	}
+	
 	/**
 	 * Get classes by expression. Expressions use the glob format.
 	 * 
@@ -60,20 +80,21 @@ class Libraries {
 	 */
 	static function get($expr){
 		$ret = array();
-	
-		$path_expr = static::toPath($expr).'.php';
-		//TODO: bootloader based ordering
-		$paths = \AutoLoader::$pathCache;
-		foreach($paths as $prefix){
-			$prefixLen = strlen($prefix);
-			foreach(glob($prefix.$path_expr) as $file){
-				$key = substr(static::toClass($file),$prefixLen,-4);
-				$ret[$key] = true;
+		
+		$unique = md5(time()+ rand(0, 10000));
+		$expr = str_replace('*', $unique, $expr);
+		
+		$expr = preg_quote($expr);
+		
+		$expr = '`^'.str_replace($unique, '(.+)', $expr).'$`s';
+		
+		$ret = array();
+		foreach(self::composer_autoloader()->getClassMap() as $class=>$path){
+			if(preg_match($expr, $class)){
+				$ret[] = $class;
 			}
 		}
-	
-		$ret = array_keys($ret);
-		sort($ret);
+		
 		return $ret;
 	}
 	

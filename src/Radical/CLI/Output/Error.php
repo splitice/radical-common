@@ -1,6 +1,6 @@
 <?php
-namespace CLI\Output;
-use Core\ErrorHandling\Handler;
+namespace Radical\CLI\Output;
+use Radical\Core\ErrorHandling\Handler;
 
 class Error extends Internal\OutputBase {
 	const FORMAT = "[%s] %s\r\n";

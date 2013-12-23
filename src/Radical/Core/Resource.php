@@ -53,7 +53,4 @@ class Resource {
 	
 		return false;
 	}
-	function getFile(){
-		return new \File($this->getFullPath());
-	}
 }
