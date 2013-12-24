@@ -19,7 +19,7 @@ abstract class ErrorHandlerBase extends Handler {
 	 */
 	function __construct(){
 		//Itterate all error trackers
-		foreach(\Core\Libraries::get(self::ERRORS_EXPR) as $class){
+		foreach(\Radical\Core\Libraries::get(self::ERRORS_EXPR) as $class){
 			$class::Init();
 		}
 		

@@ -1,82 +1,32 @@
 <?php
 namespace Radical\Core\ErrorHandling\Handlers;
 
-use Radical\Core\ErrorHandling\IToCode;
 use Radical\Core\ErrorHandling\Errors\Internal\ErrorBase;
 use Radical\Core\ErrorHandling\Errors\Internal\ErrorException;
-use Radical\CLI\Console\Colors;
-use Radical\CLI\Threading\Thread;
-use Radical\Core\ErrorHandling\Errors;
-use Radical\Web\Page\Handler\PageRequest;
 
 class OutputErrorHandler extends ErrorHandlerBase {
 	const CLI_START = "[%s]%s\n";
-	private $is_cli;
+	const CLI_HANDLER = '\Core\ErrorHandling\Handlers\CLIOutputErrorHandler';
+	const WEB_HANDLER = '\Core\ErrorHandling\Handlers\WebOutputErrorHandler';
+	private $handler;
 	
 	function __construct($is_cli = null){
 		if($is_cli === null){
-			$is_cli = \Core\Server::isCLI();
+			$is_cli = \Radical\Core\Server::isCLI();
 		}
-		$this->is_cli = $is_cli;
 		
-		parent::__construct();
+		if($is_cli)
+			$c = self::CLI_HANDLER;
+		else
+			$c = self::WEB_HANDLER;
+		
+		$this->handler = new $c;
 	}
 	
 	function error(ErrorBase $error) {
-		if($error->isFatal()){
-			throw $error;
-		}
+		return $this->handler->error($error);
 	}
 	function exception(ErrorException $error){
-		if($this->is_cli){
-			$c = Colors::getInstance();
-			
-			//Code
-			if($error instanceof IToCode){
-				$code = $error->toCode();
-			}else{
-				if($error->isFatal()){
-					$code = $c->getColoredString('FATAL','red');
-				}else{
-					$code = $c->getColoredString('ERROR','light_red');
-				}
-			}
-			
-			//Format Output
-			$message = $error->getMessage();
-			if($message{0} != '['){
-				$message = ' '.$message;
-			}
-			$output = sprintf(static::CLI_START,$code,$message);
-			
-			//If Threaded include ThreadID
-			$T = Thread::current();
-			if($T){//If threading
-				if($T->parent || count($T->children)){
-					$output = '['.$c->getColoredString('#'.$T->getId(),'cyan').']'.$output;
-				}
-			}
-			
-			//Output it
-			\CLI\Console\Colors::getInstance()->Output($output);
-			
-			//OB
-			if(ob_get_level()) ob_flush();
-		}else{
-			if(ob_get_level()) ob_end_clean();
-			try {
-				\Web\Page\Handler::init();
-				\Web\Page\Handler::$stack->push(new PageRequest(null));
-				//@todo Remove ugly hack
-				$page = $error->getPage();
-				while($page){
-					$page = $page->GET();
-				}
-				\Web\Page\Handler::current(true)->headers->output();
-			}catch(\Exception $ex){
-				die('Error: '.$ex->getMessage());
-			}
-			exit;
-		}
+		return $this->handler->exception($error);
 	}
 }

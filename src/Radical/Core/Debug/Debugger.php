@@ -1,7 +1,7 @@
 <?php
 namespace Radical\Core\Debug;
 use ReflectionClass;
-use Basic\String;
+use Radical\Basic\String;
 
 class Debugger {
 
@@ -163,7 +163,8 @@ class Debugger {
 			return static::$_closureCache[$cacheKey];
 		}
 
-		if ($class = Inspector::classes(array('file' => $frame['file']))) {
+		$class = Inspector::classes(array('file' => $frame['file']));
+		if ($class) {
 			foreach (Inspector::methods(key($class), 'extents') as $method => $extents) {
 				$line = $frame['line'];
 
