@@ -1,5 +1,5 @@
 <?php
-namespace Exceptions;
+namespace Radical\Exceptions;
 
 class ValidationException extends \Exception {
 	protected $field;

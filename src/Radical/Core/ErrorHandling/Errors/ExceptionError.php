@@ -9,7 +9,7 @@ class ExceptionError extends Internal\ErrorBase {
 		$this->ex = $ex;
 		
 		//Build Error page
-		if(\Core\Server::isProduction()){
+		if(\Radical\Core\Server::isProduction()){
 			$message = 'An exception has occured in the script.';
 			global $_ADMIN_EMAIL;
 			if(isset($_ADMIN_EMAIL)){

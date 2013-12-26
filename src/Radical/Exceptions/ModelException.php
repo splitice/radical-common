@@ -1,5 +1,5 @@
 <?php
-namespace Exceptions;
+namespace Radical\Exceptions;
 
 class ModelException extends \Exception {
 	

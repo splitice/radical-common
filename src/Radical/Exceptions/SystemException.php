@@ -1,5 +1,5 @@
 <?php
-namespace Exceptions;
+namespace Radical\Exceptions;
 
 abstract class SystemException extends \Exception {
 	

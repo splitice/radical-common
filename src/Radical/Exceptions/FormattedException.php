@@ -1,5 +1,5 @@
 <?php
-namespace Exceptions;
+namespace Radical\Exceptions;
 
 class FormattedException extends \Exception {
 	function __construct(){

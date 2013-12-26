@@ -31,14 +31,14 @@ class PHPError extends Internal\ErrorBase {
 				case E_CORE_WARNING:
 				case E_USER_WARNING:
 				case E_WARNING:
-					\CLI\Output\Error::Warning($message);
+					\Radical\CLI\Output\Error::Warning($message);
 					break;
 				case E_NOTICE:
 				case E_STRICT:
 				case E_USER_NOTICE:
 				case E_USER_DEPRECATED:
 				case E_DEPRECATED:
-					\CLI\Output\Error::Notice($message);
+					\Radical\CLI\Output\Error::Notice($message);
 					break;
 			}
 		}

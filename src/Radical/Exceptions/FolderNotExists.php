@@ -1,5 +1,5 @@
 <?php
-namespace Exceptions;
+namespace Radical\Exceptions;
 class FolderNotExists extends FileException {
 	function __construct($file){
 		parent::__construct($file);
