@@ -8,6 +8,7 @@ class Libraries {
 		if($once === false){
 			foreach(spl_autoload_functions () as $a){
 				if(is_array($a)){
+					$a = $a[0];
 					if($a instanceof ClassLoader){
 						$once = $a;
 						break;
