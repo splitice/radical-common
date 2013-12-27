@@ -6,8 +6,8 @@ use Radical\Core\ErrorHandling\Errors\Internal\ErrorException;
 
 class OutputErrorHandler extends ErrorHandlerBase {
 	const CLI_START = "[%s]%s\n";
-	const CLI_HANDLER = '\Core\ErrorHandling\Handlers\CLIOutputErrorHandler';
-	const WEB_HANDLER = '\Core\ErrorHandling\Handlers\WebOutputErrorHandler';
+	const CLI_HANDLER = '\Radical\Core\ErrorHandling\Handlers\CLIOutputErrorHandler';
+	const WEB_HANDLER = '\Radical\Core\ErrorHandling\Handlers\WebOutputErrorHandler';
 	private $handler;
 	
 	function __construct($is_cli = null){

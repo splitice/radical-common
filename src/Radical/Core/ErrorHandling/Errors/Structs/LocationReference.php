@@ -15,6 +15,6 @@ class LocationReference {
 	}
 	
 	function toShort(){
-		return \Core\Path::pathVariblize($this->file).'@'.$this->line;
+		return $this->file.'@'.$this->line;
 	}
 }
