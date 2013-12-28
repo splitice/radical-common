@@ -12,7 +12,7 @@ abstract class ErrorHandlerBase extends Handler {
 	 * @radical ns-expr
 	 * @var string
 	 */
-	const ERRORS_EXPR = '\\Core\\ErrorHandling\\Errors\\*';
+	const ERRORS_EXPR = '\\Radical\\Core\\ErrorHandling\\Errors\\*';
 	
 	/**
 	 * Calls the init functions for all the error modules
