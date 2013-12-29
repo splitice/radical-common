@@ -40,10 +40,6 @@ class SerializableErrorException implements IErrorException {
 	function getMessage(){
 		return $this->message;
 	}
-
-	function getPage(){
-		return new Controller\Error($this);
-	}
 	
 	function getTraceOutput(){
 		return $this->trace_output;

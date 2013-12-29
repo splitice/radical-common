@@ -1,6 +1,6 @@
 <?php
 namespace Radical\Core\ErrorHandling\Errors\Internal;
-use Radical\Web\Page\Controller;
+
 use Radical\Core\ErrorHandling\IErrorException;
 
 abstract class ErrorException extends \Exception implements IErrorException {
@@ -22,10 +22,6 @@ abstract class ErrorException extends \Exception implements IErrorException {
 	
 	function isFatal(){
 		return $this->fatal;
-	}
-
-	function getPage(){
-		return new Controller\Error($this);
 	}
 	
 	function getTraceOutput(){
