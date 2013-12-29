@@ -2,16 +2,9 @@
 namespace Radical\Core;
 
 class Resource {
-	static $default_dirs = array('system','app');
-	
 	private $path;
-	private $dirs = array();
-	function __construct($path,$dirs = null){
+	function __construct($path){
 		$this->path = $path;
-		if($dirs === null){
-			$dirs = static::$default_dirs;
-		}
-		$this->dirs = $dirs;
 	}
 	
 	private $fullPath;
@@ -20,23 +13,19 @@ class Resource {
 		
 		global $BASEPATH;
 		
-		foreach(array_reverse($this->dirs) as $dir){
-			$file = $BASEPATH.$dir.DS.$this->path;
-			if(file_exists($file)){
-				$this->fullPath = $file;
-				return $file;
-			}
+		$file = $BASEPATH.$this->path;
+		if(file_exists($file)){
+			$this->fullPath = $file;
+			return $file;
 		}
 	}
 	function getFiles($expr = '*'){
 		global $BASEPATH;
 		
 		$files = array();
-		foreach($this->dirs as $dir){
-			$file = $BASEPATH.$dir.DS.$this->path;
-			if(file_exists($file) && is_dir($file)){
-				$files = array_merge($files,glob($file.DIRECTORY_SEPARATOR.$expr));
-			}
+		$file = $BASEPATH.$this->path;
+		if(file_exists($file) && is_dir($file)){
+			$files = array_merge($files,glob($file.DIRECTORY_SEPARATOR.$expr));
 		}
 		
 		return $files;
@@ -44,11 +33,9 @@ class Resource {
 	function exists(){
 		global $BASEPATH;
 	
-		foreach($this->dirs as $dir){
-			$file = $BASEPATH.$dir.DS.$this->path;
-			if(file_exists($file) && is_dir($file)){
-				return true;
-			}
+		$file = $BASEPATH.$this->path;
+		if(file_exists($file) && is_dir($file)){
+			return true;
 		}
 	
 		return false;
