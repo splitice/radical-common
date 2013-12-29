@@ -98,9 +98,14 @@ class Libraries {
 		$expr = ltrim($expr, '\\');
 		$expr_path = str_replace('\\',DIRECTORY_SEPARATOR,$expr).'.php';
 		$prefixes = self::composer_autoloader()->getPrefixes();
+		$wildcard_pos = strpos($expr, '*');
 
 		foreach ($prefixes as $prefix => $dirs) {
-			if (0 === strpos($expr, $prefix)) {
+			$compare_len = strlen($prefix);
+			if($compare_len > $wildcard_pos)
+				$compare_len = $wildcard_pos;
+			
+			if ($wildcard_pos == 0 || 0 === substr_compare($expr, $prefix, 0, $compare_len)) {
 				foreach ($dirs as $dir) {
 					$s = strlen($dir);
 					$g = glob($dir . DIRECTORY_SEPARATOR. $expr_path);
