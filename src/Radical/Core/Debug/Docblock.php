@@ -42,7 +42,8 @@ class Docblock {
 		$comment = trim(preg_replace('/^(\s*\/\*\*|\s*\*{1,2}\/|\s*\* ?)/m', '', $comment));
 		$comment = str_replace("\r\n", "\n", $comment);
 
-		if ($items = preg_split('/\n@/ms', $comment, 2)) {
+		$items = preg_split('/\n@/ms', $comment, 2);
+		if ($items) {
 			list($description, $tags) = $items + array('', '');
 			$tags = $tags ? static::tags("@{$tags}") : array();
 		}

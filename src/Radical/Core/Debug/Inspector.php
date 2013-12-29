@@ -343,7 +343,7 @@ class Inspector {
 	public static function lines($data, $lines) {
 		if (!strpos($data, PHP_EOL)) {
 			if (!file_exists($data)) {
-				$data = \Core\Libraries::path($data);
+				$data = \Radical\Core\Libraries::path($data);
 				if (!file_exists($data)) {
 					return null;
 				}
@@ -396,7 +396,8 @@ class Inspector {
 		$files = get_included_files();
 		$classes = array();
 
-		if ($file = $options['file']) {
+		$file = $options['file'];
+		if ($file) {
 			$loaded = static::_instance('collection', array('data' => array_map(
 					function($class) {
 				return new ReflectionClass($class);
@@ -451,7 +452,7 @@ class Inspector {
 		};
 
 		foreach ((array) $classes as $class) {
-			$data = explode("\n", file_get_contents(\Core\Libraries::path($class)));
+			$data = explode("\n", file_get_contents(\Radical\Core\Libraries::path($class)));
 			$data = "<?php \n" . join("\n", preg_grep('/^\s*use /', $data)) . "\n ?>";
 
 			$classes = array_map($join, Parser::find($data, 'use *;', array(
