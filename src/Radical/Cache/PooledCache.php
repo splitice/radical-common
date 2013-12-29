@@ -9,7 +9,7 @@ class PooledCache {
 			return static::$cache[$object];
 		}
 		
-		$c = 'Utility\\Cache\\Object\\'.$object;
+		$c = 'Radical\\Cache\\Object\\'.$object;
 		if(!class_exists($c)){
 			throw new \Exception('Cant find cache of type: '.$object);
 		}
