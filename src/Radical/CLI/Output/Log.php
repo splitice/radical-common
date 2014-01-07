@@ -2,7 +2,7 @@
 namespace Radical\CLI\Output;
 
 class Log {
-	const LOG_PATH = '../../../../log/';
+	const LOG_PATH = '/log/';
 	const LOG_EXT = '.log';
 	
 	static $main;
@@ -12,7 +12,8 @@ class Log {
 		self::$main = self::Create($name);
 	}
 	static function getPath(){
-		$path = __DIR__.'/'.self::LOG_PATH.'/';
+		global $BASEPATH;
+		$path = $BASEPATH.'/'.self::LOG_PATH.'/';
 		@mkdir($path);
 		return $path;
 	}
