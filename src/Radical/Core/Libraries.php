@@ -4,6 +4,11 @@ namespace Radical\Core;
 use Composer\Autoload\ClassLoader;
 class Libraries {
 	/**
+	 * @var \Radical\Cache\Object\ICache an optional cache for iterated queries
+	 */
+	public static $cache;
+	
+	/**
 	 * @return \Composer\Autoload\ClassLoader
 	 */
 	static function composer_autoloader(){
@@ -92,7 +97,14 @@ class Libraries {
 	 * @param string $expr expression to search for
 	 * @return array of classes
 	 */
-	static function get($expr){
+	static function get($expr, $cache = true){
+		if(self::$cache && $cache){
+			$ret = self::$cache->get($expr);
+			if(is_array($ret)){
+				return $ret;
+			}
+		}
+		
 		$ret = array();
 		
 		$expr = ltrim($expr, '\\');
@@ -116,6 +128,10 @@ class Libraries {
 					}
 				}
 			}
+		}
+		
+		if(self::$cache && $cache){
+			self::$cache->set($expr, $ret, 0);
 		}
 		
 		return $ret;
