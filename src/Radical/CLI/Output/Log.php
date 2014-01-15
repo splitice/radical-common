@@ -25,16 +25,21 @@ class Log {
 		}
 		self::$main = self::Create();
 	}
-	static function create($name = 'main'){
+	static function create($name = 'main', $group = null){
 		$file = static::getPath();
-		if(self::$group){
+		
+		//Group path element
+		if($group){
+			$file .= $group.'/';
+		}elseif(self::$group){
 			$file .= self::$group.'/';
 		}
+		mkdir($file);
+		
 		$file .= $name;
 		$file .= self::LOG_EXT;
 		
-		$ret = new LogFile($file);
-		return $ret;
+		return new LogFile($file);
 	}
 	
 	static function GET(){
