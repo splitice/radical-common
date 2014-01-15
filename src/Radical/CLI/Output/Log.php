@@ -2,7 +2,7 @@
 namespace Radical\CLI\Output;
 
 class Log {
-	const LOG_PATH = '/log/';
+	const LOG_PATH = '/var/log/radical/';
 	const LOG_EXT = '.log';
 	
 	static $main;
