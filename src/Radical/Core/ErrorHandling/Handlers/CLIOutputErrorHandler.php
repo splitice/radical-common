@@ -8,6 +8,8 @@ use Radical\CLI\Console\Colors;
 
 class CLIOutputErrorHandler extends ErrorHandlerBase {
 	const CLI_START = "[%s]%s\n";
+	
+	private $in_error = false;
 
 	function error(ErrorBase $error) {
 		if($error->isFatal()){
@@ -15,6 +17,11 @@ class CLIOutputErrorHandler extends ErrorHandlerBase {
 		}
 	}
 	function exception(ErrorException $error){
+		if($this->in_error){
+			return;
+		}
+		$this->in_error = true;
+		
 		$c = Colors::getInstance();
 		
 		//Code
@@ -48,5 +55,8 @@ class CLIOutputErrorHandler extends ErrorHandlerBase {
 		
 		//OB
 		if(ob_get_level()) ob_flush();
+		
+
+		$this->in_error = false;
 	}
 }

@@ -1,23 +1,30 @@
 <?php
 namespace Radical\CLI\Output;
 class LogFile {
-	private $file;
+	private $filename;
 	const DATE_FORMAT = 'd-m-y H:i:s.';
 	
 	function __construct($file){
-		$this->file = fopen($file,'ct+');
-		fseek($this->file,0,SEEK_END);
+		$this->filename = $file;
 	}
 	
 	function write($line){
+		$file = fopen($this->filename,'ct+');
+		if(!$file){
+			return;
+		}
+		fseek($file,0,SEEK_END);
 		$line = rtrim($line,"\r\n")."\r\n";
 		$line = date(self::DATE_FORMAT).' '.$line;
-		fwrite($this->file,$line);
+		fwrite($file,$line);
+		fclose($file);
 	}
 	function errorCheck($line){
-		$start_pos = ftell($this->file);
+		$file = fopen($this->filename,'ct+');
+		fseek($file,0,SEEK_END);
+		$start_pos = ftell($file);
 		self::Write($line);
-		$end_pos = ftell($this->file);
-		return new Log\ErrorCheck($this->file, $start_pos, $end_pos);
+		$end_pos = ftell($file);
+		return new Log\ErrorCheck($file, $start_pos, $end_pos);
 	}
 }

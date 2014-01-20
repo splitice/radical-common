@@ -11,12 +11,13 @@ class Log {
 	static function init($name){		
 		self::$main = self::Create($name);
 	}
+	
 	static function getPath(){
-		global $BASEPATH;
-		$path = $BASEPATH.'/'.self::LOG_PATH.'/';
+		$path = self::LOG_PATH.'/';
 		@mkdir($path);
 		return $path;
 	}
+	
 	static function createGroup($name){
 		self::$group = $name;
 		$file = static::getPath().self::$group.'/';
@@ -25,6 +26,7 @@ class Log {
 		}
 		self::$main = self::Create();
 	}
+	
 	static function create($name = 'main', $group = null){
 		$file = static::getPath();
 		
@@ -34,7 +36,11 @@ class Log {
 		}elseif(self::$group){
 			$file .= self::$group.'/';
 		}
-		mkdir($file);
+		
+		//Check if folder exists
+		if(!file_exists($file)){
+			mkdir($file);
+		}
 		
 		$file .= $name;
 		$file .= self::LOG_EXT;
