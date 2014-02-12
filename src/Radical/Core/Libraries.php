@@ -28,12 +28,23 @@ class Libraries {
 	}
 	
 	static function onload(){
-		$all = self::composer_autoloader()->getPrefixes();
-		foreach($all['Radical'] as $path){
-			$bootstrap_path = $path.'/bootstrap.php';
-			if(file_exists($bootstrap_path)){
-				include $bootstrap_path;
+		$cache_key = md5(__DIR__).'_autoloader_bootstraps';
+		$cached_files = apc_fetch($cache_key);
+		if(!$cached_files || !Server::isProduction()){
+			$cached_files = array();
+			$all = self::composer_autoloader()->getPrefixes();
+			foreach($all['Radical'] as $path){
+				$bootstrap_path = $path.'/bootstrap.php';
+				if(file_exists($bootstrap_path)){
+					$cached_files[] = $bootstrap_path;
+				}
 			}
+			
+			if(Server::isProduction())
+				apc_store($cache_key, $cached_files, 6000);
+		}
+		foreach($cached_files as $cf){
+			include $cf;
 		}
 	}
 	
