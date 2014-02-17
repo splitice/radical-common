@@ -2,6 +2,7 @@
 namespace Radical\Core;
 
 use Composer\Autoload\ClassLoader;
+use Radical\Cache\PooledCache;
 class Libraries {
 	/**
 	 * @var \Radical\Cache\Object\ICache an optional cache for iterated queries
@@ -28,8 +29,9 @@ class Libraries {
 	}
 	
 	static function onload(){
+		$cm = PooledCache::get("CoreLibraries","Memory");
 		$cache_key = md5(__DIR__).'_autoloader_bootstraps';
-		$cached_files = apc_fetch($cache_key);
+		$cached_files = $cm->get($cache_key);
 		if(!$cached_files || !Server::isProduction()){
 			$cached_files = array();
 			$all = self::composer_autoloader()->getPrefixes();
@@ -41,7 +43,7 @@ class Libraries {
 			}
 			
 			if(Server::isProduction())
-				apc_store($cache_key, $cached_files, 6000);
+				$cm->set($cache_key, $cached_files, 6000);
 		}
 		foreach($cached_files as $cf){
 			include $cf;
