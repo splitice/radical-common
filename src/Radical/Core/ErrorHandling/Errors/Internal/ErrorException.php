@@ -7,10 +7,10 @@ abstract class ErrorException extends \Exception implements IErrorException {
 	protected $heading;
 	protected $fatal = false;
 	
-	function __construct($message,$heading = 'An error has occured',$fatal = false){
+	function __construct($message,$heading = 'An error has occured',$fatal = false, \Exception $previous = null){
 		$this->heading = $heading;
 		$this->fatal = $fatal;
-		parent::__construct($message);
+		parent::__construct($message,0,$previous);
 	}
 
 	/**
@@ -22,6 +22,10 @@ abstract class ErrorException extends \Exception implements IErrorException {
 	
 	function isFatal(){
 		return $this->fatal;
+	}
+	
+	function getDebugMessage(){
+		return $this->getMessage();
 	}
 	
 	function getTraceOutput(){
