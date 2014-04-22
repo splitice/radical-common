@@ -88,8 +88,8 @@ class CollectionObject  implements \IteratorAggregate, \ArrayAccess, \Countable 
 	/**
 	 * Add a value to the array, if it exists overwrite.
 	 * 
-	 * @param unknown_type $k key
-	 * @param unknown_type $v value
+	 * @param mixed $k key
+	 * @param mixed $v value
 	 * @return boolean if it was overwritten
 	 */
 	function Add($k,$v){

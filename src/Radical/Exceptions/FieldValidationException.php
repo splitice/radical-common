@@ -13,7 +13,7 @@ class FieldValidationException extends ValidationException {
 	}
 	
 	/**
-	 * @return the $field
+	 * @return string $field
 	 */
 	public function getField() {
 		return $this->field;

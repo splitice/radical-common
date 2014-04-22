@@ -5,8 +5,11 @@ class Colors {
 	private $foreground_colors = array();
 	private $background_colors = array();
 	static $instance;
-	
-	static function getInstance(){
+
+    /**
+     * @return Colors
+     */
+    static function getInstance(){
 		if(!static::$instance){
 			static::$instance = new static();
 		}
