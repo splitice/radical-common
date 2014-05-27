@@ -20,7 +20,7 @@ abstract class CacheBase {
 	/**
 	 * Function that checks if a key exists in the cache, if it doesnt executes a callback and stores it as $key 
 	 * @param string $key_sem
-	 * @param function $function
+	 * @param callable $function
 	 * @param int $ttl
 	 * @return mixed
 	 */
