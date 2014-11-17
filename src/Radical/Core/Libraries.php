@@ -149,6 +149,27 @@ class Libraries {
 		
 		return $ret;
 	}
+
+    static function getProjectOrCommon($expr, $cache = true, $project = null){
+        if($project === null){
+            global $_PROJECT;
+            $project = $_PROJECT;
+        }
+
+        $all = self::get($expr, $cache);
+
+        if(count($all) == 0){
+            return null;
+        }
+
+        foreach($all as $a){
+            if(substr_compare($a, '\\'.$project, strlen($project) + 1) == 0){
+                return $a;
+            }
+        }
+
+        return $all[0];
+    }
 	
 	/**
 	 * @see Libraries::get

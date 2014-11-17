@@ -16,7 +16,7 @@ class Server {
 	 */
 	static function isProduction(){
 		//TODO: Deployment
-		if(php_sapi_name() == 'cli') return false;
+		if(php_sapi_name() == 'cli') return self::$production;
 		if(!isset($_SERVER['SERVER_ADDR'])) return true;
 		if(substr($_SERVER['SERVER_ADDR'],0,4) !== '192.' && $_SERVER['SERVER_ADDR'] !== '::1' && $_SERVER['SERVER_ADDR'] !== '127.0.0.1')
 			return self::$production;
