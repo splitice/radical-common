@@ -128,7 +128,7 @@ class CachingClassLoader
 		$file = apc_fetch($this->prefix.$class);
 		if (false === $file) {
 			$file = $this->decorated->findFile($class);
-			if(substr_compare($file, $this->base, 0, $this->base_len) == 0){
+			if(strlen($file) > $this->base_len && substr_compare($file, $this->base, 0, $this->base_len) == 0){
 				apc_store($this->prefix.$class, substr($file,$this->base_len));
 			}
 		}else{
