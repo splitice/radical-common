@@ -1,7 +1,7 @@
 <?php
 namespace Radical\Core\Debug;
-use ReflectionClass;
 use Radical\Basic\String;
+use ReflectionClass;
 
 class Debugger {
 

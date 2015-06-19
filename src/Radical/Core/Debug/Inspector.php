@@ -8,12 +8,11 @@
 
 namespace Radical\Core\Debug;
 
-use Radical\Basic\Arr\Object\CollectionObject;
-
 use Exception;
+use Radical\Basic\Arr\Object\CollectionObject;
 use ReflectionClass;
-use ReflectionProperty;
 use ReflectionException;
+use ReflectionProperty;
 
 /**
  * General source code inspector.

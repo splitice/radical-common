@@ -1,8 +1,8 @@
 <?php
 namespace Radical\CLI\Output\Error;
+use Radical\CLI\Console\Colors;
 use Radical\Core\ErrorHandling\Errors\Internal;
 use Radical\Core\ErrorHandling\IToCode;
-use Radical\CLI\Console\Colors;
 
 class OutputError extends Internal\ErrorBase implements IToCode {
 	protected $code;

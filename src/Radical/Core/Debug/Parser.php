@@ -12,8 +12,8 @@ namespace Radical\Core\Debug;
  * The parser class uses PHP's tokenizer to provide methods and tools for performing static analysis
  * on PHP code.
  */
-use Radical\Basic\Arr\Set;
 use Radical\Basic\Arr\Object\CollectionObject;
+use Radical\Basic\Arr\Set;
 
 class Parser {
 

@@ -9,10 +9,10 @@
 namespace Radical\Core\Parser;
 
 use Exception;
-use ReflectionClass;
-use ReflectionProperty;
-use ReflectionException;
 use Radical\Basic\Arr\Object\CollectionObject;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionProperty;
 
 /**
  * General source code inspector.

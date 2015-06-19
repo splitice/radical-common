@@ -3,6 +3,7 @@ namespace Radical\Core;
 
 use Composer\Autoload\ClassLoader;
 use Radical\Cache\PooledCache;
+
 class Libraries {
 	/**
 	 * @var \Radical\Cache\Object\ICache an optional cache for iterated queries

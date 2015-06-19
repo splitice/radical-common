@@ -1,7 +1,7 @@
 <?php
 namespace Radical\CLI\Output\Internal;
-use Radical\CLI\Output\OutputHandler;
 use Radical\CLI\Output;
+use Radical\CLI\Output\OutputHandler;
 
 abstract class OutputBase extends OutputHandler {
 	static function e(){
