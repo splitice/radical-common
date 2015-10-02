@@ -29,28 +29,6 @@ class Libraries {
 		return $once;
 	}
 	
-	static function onload(){
-		$cm = PooledCache::get("CoreLibraries","Memory");
-		$cache_key = md5(__DIR__).'_autoloader_bootstraps';
-		$cached_files = $cm->get($cache_key);
-		if(!$cached_files || !Server::isProduction()){
-			$cached_files = array();
-			$all = self::composer_autoloader()->getPrefixes();
-			foreach($all['Radical'] as $path){
-				$bootstrap_path = $path.'/bootstrap.php';
-				if(file_exists($bootstrap_path)){
-					$cached_files[] = $bootstrap_path;
-				}
-			}
-			
-			if(Server::isProduction())
-				$cm->set($cache_key, $cached_files, 6000);
-		}
-		foreach($cached_files as $cf){
-			include $cf;
-		}
-	}
-	
 	/**
 	 * Resolves a relative path to class the
 	 * appropriate full class path.

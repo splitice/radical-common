@@ -9,8 +9,14 @@ namespace Radical\Basic\Arr\Object;
  */
 abstract class IncompleteObject implements \IteratorAggregate, \ArrayAccess, \Serializable, \Countable {
 	protected $data = null;
+	private $cache = false;
 	abstract function getData();
-	
+	abstract function yieldData();
+
+	function cache($enable = true){
+		$this->cache = $enable;
+	}
+
 	function init(){
 		if($this->data === null){
 			$this->data = $this->getData();
@@ -19,8 +25,12 @@ abstract class IncompleteObject implements \IteratorAggregate, \ArrayAccess, \Se
 	
 	/* IteratorAggregate */
 	function getIterator() {
-		$this->Init();
-		return new \ArrayIterator($this->data);
+		if($this->cache()) {
+			$this->Init();
+			return new \ArrayIterator($this->data);
+		}else{
+			return $this->yieldData();
+		}
 	}
 	
 	/* ArrayAccess */
