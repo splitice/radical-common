@@ -8,17 +8,7 @@ namespace Radical\Basic\Arr\Object;
  *
  */
 class ArrayObject extends CollectionObject {
-	/* (non-PHPdoc)
-	 * @see \Basic\Arr\Object\CollectionObject::Set()
-	 */
-	function set($v){
-		return parent::Set(null, $v);
-	}
-	
-	/* (non-PHPdoc)
-	 * @see \Basic\Arr\Object\CollectionObject::Add()
-	 */
-	function Add($v){
+	function append($v){
 		return parent::Add(null, $v);
 	}
 	

@@ -45,6 +45,36 @@ class Format  {
 		
 		return vsprintf ( $format, array_values ( $args ) );
 	}
+
+	static function sscan2regex($format){
+		$regex = preg_replace_callback('`(?<percent>%%)|(?:%\\((?<name>[^\\)]+)\\)(?<type>s|d))|(?<other>[^%]+)`',function($m){//|(?:%(?<type>s|d))
+			if(!empty($m['percent'])){
+				return $m['percent'];
+			}
+
+			if(!empty($m['name'])){
+				switch($m['type']) {
+					case 's':
+						return '(?<'.$m['name'].'>.+)';
+					case 'd':
+						return '(?<'.$m['name'].'>[0-9]+)';
+				}
+			}
+
+			if(!empty($m['type'])){
+				switch($m['type']) {
+					case 's':
+						return '(.+)';
+					case 'd':
+						return '([0-9]+)';
+				}
+			}
+
+			return preg_quote($m['other'],'`');
+		}, $format);
+
+		return "`^$regex\$`";
+	}
 	
 	/**
 	 * version of sscanf for cases where named arguments are desired (python syntax)
@@ -116,6 +146,26 @@ class Format  {
 	 */
 	static function consume($str,$format){
 		return static::sscanfn($str, $format);
+	}
+
+	/**
+	 * version of sscanf for cases where named arguments are desired (python syntax)
+	 *
+	 * ConsumeRegex('second: %(second)s ; first: %(first)s', array(
+	 *  'first' => '1st',
+	 *  'second'=> '2nd'
+	 * ));
+	 *
+	 * @param string $str string to match on
+	 * @param string $format sprintf format string, with any number of named arguments
+	 * @return array result of scanf call with arguments as their key
+	 */
+	static function consumeRegex($str,$format,&$match){
+		$pattern = self::sscan2regex($format);
+		if($pattern === null){
+			throw new \Exception("Invalid pattern $format");
+		}
+		return preg_match($pattern,$str,$match);
 	}
 	
 	/**
