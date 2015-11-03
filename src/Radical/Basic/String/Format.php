@@ -165,7 +165,11 @@ class Format  {
 		if($pattern === null){
 			throw new \Exception("Invalid pattern $format");
 		}
-		return preg_match($pattern,$str,$match);
+		$matches = preg_match($pattern,$str,$match);
+		if($matches){
+			unset($match[0]);
+		}
+		return $matches;
 	}
 	
 	/**
