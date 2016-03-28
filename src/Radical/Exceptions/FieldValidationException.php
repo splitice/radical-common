@@ -5,7 +5,7 @@ class FieldValidationException extends ValidationException {
 	protected $field;
 	function __construct($field = null){
 		$this->field = $field;
-		$message = 'A validation Exception occured';
+		$message = 'A validation Exception occurred';
 		if($field){
 			$message .= ' with '.$field;
 		}
