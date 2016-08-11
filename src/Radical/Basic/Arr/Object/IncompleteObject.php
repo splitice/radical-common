@@ -101,7 +101,7 @@ abstract class IncompleteObject implements \IteratorAggregate, \ArrayAccess, \Se
 	}
 
 	/**
-	 * @return $this|array
+	 * @return array
 	 */
 	function toArray(){
 		$this->Init();
