@@ -1,5 +1,5 @@
 <?php
-namespace Radical\Basic\String;
+namespace Radical\Basic\StringHelper;
 
 class Format  {
 	/**

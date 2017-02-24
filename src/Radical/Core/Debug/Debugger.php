@@ -1,6 +1,6 @@
 <?php
 namespace Radical\Core\Debug;
-use Radical\Basic\String;
+use Radical\Basic\StringHelper;
 use ReflectionClass;
 
 class Debugger {
@@ -71,7 +71,7 @@ class Debugger {
 			if ($options['format'] == 'points' && $trace['file'] != '[internal]') {
 				$back[] = array('file' => $trace['file'], 'line' => $trace['line']);
 			} elseif (is_string($options['format']) && $options['format'] != 'array') {
-				$back[] = String\Format::sprintfn($options['format'], array_map(
+				$back[] = StringHelper\Format::sprintfn($options['format'], array_map(
 						function($data) {
 							return is_object($data) ? get_class($data) : $data;
 						},
