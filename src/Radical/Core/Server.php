@@ -16,7 +16,7 @@ class Server {
 	 */
 	static function isProduction(){
 		if(!isset($_SERVER['SERVER_ADDR'])) return self::$production;
-		if(substr($_SERVER['SERVER_ADDR'],0,4) !== '192.' && $_SERVER['SERVER_ADDR'] !== '::1' && $_SERVER['SERVER_ADDR'] !== '127.0.0.1')
+		if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1')
 			return false;
 
 		return self::$production;
