@@ -21,6 +21,10 @@ class Server {
 
 		return self::$production;
 	}
+	static function getEnvironment(){
+	    $env = $_ENV['x4b_environment'];
+	    return $env;
+    }
 	
 	/**
 	 * Is this site running in Command Line mode?

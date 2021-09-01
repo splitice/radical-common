@@ -68,7 +68,7 @@ class PHPClassTools {
 		if($class == 'self' || $class == 'static' || $class == 'parent' || $class == '__construct'){
 			return;
 		}
-		if($class{0} == '\\'){
+		if($class[0] == '\\'){
 			return $class;
 		}
 		if($class){

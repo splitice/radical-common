@@ -19,6 +19,11 @@ class Memory extends Internal\CacheBase implements ICache {
 				return apc_fetch ( $key );
 			}
 		}
+        if (function_exists ( 'apcu_fetch' )) {
+            if(function_exists ( 'apcu_exists' ) && apcu_exists($key)){
+                return apcu_fetch ( $key );
+            }
+        }
 		if (function_exists ( 'xcache_get' )) {
 			if(xcache_isset($key)){
 				return xcache_get ( $key );
@@ -38,6 +43,9 @@ class Memory extends Internal\CacheBase implements ICache {
 		if (function_exists ( 'apc_store' )) {
 			return @apc_store ( $key, $value, $ttl );
 		}
+        if (function_exists ( 'apcu_store' )) {
+            return @apcu_store ( $key, $value, $ttl );
+        }
 		if (function_exists ( 'xcache_set' )) {
 			return xcache_set ( $key, $value, $ttl );
 		}
@@ -48,6 +56,9 @@ class Memory extends Internal\CacheBase implements ICache {
 		if (function_exists ( 'apc_delete' )) {
 			return apc_delete ( $key );
 		}
+        if (function_exists ( 'apcu_delete' )) {
+            return apcu_delete ( $key );
+        }
 		if (function_exists ( 'xcache_unset' )) {
 			return xcache_unset ( $key );
 		}

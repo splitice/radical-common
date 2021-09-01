@@ -9,7 +9,7 @@ class FileCache extends Internal\FileCacheBase implements ICache {
 		$hash = md5($key);
 		
 		$dir = $this->CachePath();
-		$parts = array(static::PATH,$hash{0},$hash{1},$hash{2},$hash{3});
+		$parts = array(static::PATH,$hash[0],$hash[1],$hash[2],$hash[3]);
 		foreach($parts as $p){
 			$dir .= DS.$p;
 			if(!file_exists($dir)){

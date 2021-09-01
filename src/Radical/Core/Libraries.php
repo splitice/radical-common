@@ -63,6 +63,11 @@ class Libraries {
 		}
 		return str_replace('\\', DIRECTORY_SEPARATOR, $class);
 	}
+
+	static function isProjectSpace($class){
+	    global $_PROJECT;
+	    return starts_with($class, $_PROJECT);
+    }
 	
 	/**
 	 * Get a class relative to the project namespace
